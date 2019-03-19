@@ -1,0 +1,21 @@
+<div id="login">
+  <form #f="ngForm" (ngSubmit)="loginFunc(f)">
+    <div class="container">
+      <h1>Login</h1>
+      <p>Please enter your credentials.</p>
+      <hr>
+
+      <p>Email</p>
+      <input placeholder="Enter Email" name="email" type="email" required ngModel class="form-control">
+
+      <p>Password</p>
+      <input type="password" placeholder="Enter Password" name="password" required ngModel class="form-control">
+      <button type="submit" class="registerbtn" [disabled]="f.invalid">Login</button>
+    </div>
+
+    <div class="container signin">
+      <p>Dont have an account?
+        <a routerLink="/register">Sign up</a>.</p>
+    </div>
+  </form>
+</div>
