@@ -12,21 +12,25 @@ export class AuthService {
     constructor(private toastr: ToastrService, private router: Router) { }
 
     login(email: string, password: string) {
-        firebase.auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((data) => {
-                firebase.auth()
-                    .currentUser
-                    .getIdToken()
-                    .then((token: string) => {
-                        this.token = token;
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                return firebase.auth()
+                    .signInWithEmailAndPassword(email, password)
+                    .then((data) => {
+                        firebase.auth()
+                            .currentUser
+                            .getIdToken()
+                            .then((token: string) => {
+                                this.token = token;
+                            })
+                        this.router.navigate(['/cars']);
+                        this.toastr.success('Successfully Logged In!', 'Success');
                     })
-                this.router.navigate(['/cars']);
-                this.toastr.success('Successfully Logged In!', 'Success');
+                    .catch((err) => {
+                        this.toastr.error(err.message, 'Warning');
+                    })
             })
-            .catch((err) => {
-                this.toastr.error(err.message, 'Warning');
-            })
+
     }
 
     register(email: string, password: string) {
@@ -51,12 +55,7 @@ export class AuthService {
     }
 
     getToken() {
-        firebase.auth()
-            .currentUser
-            .getIdToken()
-            .then((token: string) => {
-                this.token = token;
-            })
+        this.token = sessionStorage.getItem('firebase:authUser:AIzaSyBySWrCK-Z81QEqNlN675PlARATVP-IWt4:[DEFAULT]')
         return this.token;
     }
 

@@ -24,7 +24,7 @@ h2 {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 0 5px;
+    margin: 0 0.5rem;
 }
 
 #welcome-container {
@@ -33,13 +33,13 @@ h2 {
 }
 
 #welcome-container>img {
-    margin-top: 20px;
+    margin-top: 5px;
     height: 100%;
     width: 100%;
 }
 
 #button-div {
     padding-top: 10px;
-    width: 37%;
+    width: 50%;
     margin: auto;
 }
