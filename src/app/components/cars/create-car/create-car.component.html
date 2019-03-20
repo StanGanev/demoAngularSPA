@@ -1,36 +1,70 @@
+{{car | json}}
 <div id="create-listing">
-  <form action="#/createCar" method="post">
-      <div class="container">
-          <h1>Create Car Listing</h1>
-          <p>Please fill in this form to create an listing.</p>
-          <hr>
+  <form #f="ngForm" ngSubmit="createFunc()">
+    <div class="container">
+      <h1>Create Car Listing</h1>
+      <p>Please fill in this form to create an listing.</p>
+      <hr>
 
-          <p>Title</p>
-          <input type="text" placeholder="Enter Title" name="title">
-
-          <p>Description</p>
-          <input type="text" placeholder="Enter Description" name="description">
-
-          <p>Car Brand</p>
-          <input type="text" placeholder="Enter Car Brand" name="brand">
-
-          <p>Car Model</p>
-          <input type="text" placeholder="Enter Car Model" name="model">
-
-          <p>Car Year</p>
-          <input type="number" placeholder="Enter Car Year" name="year">
-
-          <p>Car Image</p>
-          <input type="text" placeholder="Enter Car Image" name="imageUrl">
-
-          <p>Car Fuel Type</p>
-          <input type="text" placeholder="Enter Car Fuel Type" name="fuelType">
-
-          <p>Car Price</p>
-          <input type="number" placeholder="Enter Car Price" name="price">
-
-          <hr>
-          <button type="submit" class="registerbtn">Create Listing</button>
+      <p>Title</p>
+      <div class="form-group">
+        <label for="titel"></label>
+        <input type="text" placeholder="Enter Title" name="title" class="form-control" required
+        [(ngModel)]="car.titel">
       </div>
+
+      <p>Description</p>
+      <div class="form-group">
+        <label for="description"></label>
+        <input type="text" placeholder="Enter Description" name="description" class="form-control" required
+        [(ngModel)]="car.description">
+      </div>
+
+      <p>Car Brand</p>
+      <div class="form-group">
+        <label for="brand"></label>
+        <input type="text" placeholder="Enter Car Brand" name="brand" class="form-control" required
+        [(ngModel)]="car.brand">
+      </div>
+
+      <p>Car Model</p>
+      <div class="form-group">
+        <label for="model"></label>
+        <input type="text" placeholder="Enter Car Model" name="model" class="form-control" required
+        [(ngModel)]="car.model">
+      </div>
+
+      <p>Car Year</p>
+      <div class="form-group">
+        <label for="year"></label>
+        <input type="number" placeholder="Enter Car Year" name="year" class="form-control" required
+        [(ngModel)]="car.year">
+      </div>
+
+      <p>Car Image</p>
+      <div class="form-group">
+        <label for="imageUrl"></label>
+        <input type="text" placeholder="Enter Car Image" name="imageUrl" class="form-control" required
+        [(ngModel)]="car.imageUrl">
+      </div>
+
+      <p>Car Fuel Type</p>
+      <div class="form-group">
+        <label for="fuelType"></label>
+        <input type="text" placeholder="Enter Car Fuel Type" name="fuelType" class="form-control" required
+        [(ngModel)]="car.fuelType">
+      </div>
+
+      <p>Car Price</p>
+      <div class="form-group">
+        <label for="price"></label>
+        <input type="number" placeholder="Enter Car Price" name="price" class="form-control" required
+        [(ngModel)]="car.price">
+      </div>
+
+      <hr>
+
+      <button type="submit" class="registerbtn">Create Listing</button>
+    </div>
   </form>
 </div>
