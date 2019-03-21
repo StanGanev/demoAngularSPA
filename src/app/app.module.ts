@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { ListAllCarsComponent } from './components/cars/list-all-cars/list-all-c
 import { CarDetailsComponent } from './components/cars/car-details/car-details.component';
 import { CarEditComponent } from './components/cars/car-edit/car-edit.component';
 import { CreateCarComponent } from './components/cars/create-car/create-car.component';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,11 @@ import { CreateCarComponent } from './components/cars/create-car/create-car.comp
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

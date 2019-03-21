@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
     token: string;
+    tokenForCrud: string;
 
     constructor(private toastr: ToastrService, private router: Router) { }
 
@@ -57,6 +58,17 @@ export class AuthService {
     getToken() {
         this.token = sessionStorage.getItem('firebase:authUser:AIzaSyBySWrCK-Z81QEqNlN675PlARATVP-IWt4:[DEFAULT]')
         return this.token;
+    }
+
+    getCrudToken() {
+        firebase.auth()
+    .currentUser
+    .getIdToken()
+    .then((token : string) => {
+      this.token = token;
+    })
+
+    return this.tokenForCrud;
     }
 
     isAuth(): boolean {
