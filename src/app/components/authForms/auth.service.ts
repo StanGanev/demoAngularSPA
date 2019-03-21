@@ -8,70 +8,56 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
     token: string;
-    tokenForCrud: string;
 
     constructor(private toastr: ToastrService, private router: Router) { }
 
     login(email: string, password: string) {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-            .then(() => {
-                return firebase.auth()
-                    .signInWithEmailAndPassword(email, password)
-                    .then((data) => {
-                        firebase.auth()
-                            .currentUser
-                            .getIdToken()
-                            .then((token: string) => {
-                                this.token = token;
-                            })
-                        this.router.navigate(['/cars']);
-                        this.toastr.success('Successfully Logged In!', 'Success');
-                    })
-                    .catch((err) => {
-                        this.toastr.error(err.message, 'Warning');
-                    })
-            })
-
-    }
-
-    register(email: string, password: string) {
         firebase.auth()
-            .createUserWithEmailAndPassword(email, password)
+            .signInWithEmailAndPassword(email, password)
             .then((data) => {
-                this.router.navigate(['/login']);
-                this.toastr.success('Successfully Registered In!', 'Success')
+                firebase.auth()
+                    .currentUser
+                    .getIdToken()
+                    .then((token: string) => {
+                        this.token = token;
+                        sessionStorage.setItem('authtoken',this.token);
+                    })
+                this.router.navigate(['/cars']);
+                this.toastr.success('Successfully Logged In!', 'Success');
             })
             .catch((err) => {
                 this.toastr.error(err.message, 'Warning');
             })
-    }
 
-    logout() {
-        firebase.auth().signOut()
-            .then(() => {
-                this.token = null;
-                this.router.navigate(['/index']);
-                this.toastr.success('Successfully Logged Out!', 'Success');
-            });
-    }
+}
 
-    getToken() {
-        this.token = sessionStorage.getItem('firebase:authUser:AIzaSyBySWrCK-Z81QEqNlN675PlARATVP-IWt4:[DEFAULT]')
-        return this.token;
-    }
+register(email: string, password: string) {
+    firebase.auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((data) => {
+            this.router.navigate(['/login']);
+            this.toastr.success('Successfully Registered In!', 'Success')
+        })
+        .catch((err) => {
+            this.toastr.error(err.message, 'Warning');
+        })
+}
 
-    getCrudToken() {
-        firebase.auth()
-    .currentUser
-    .getIdToken()
-    .then((token : string) => {
-      this.token = token;
-    })
+logout() {
+    firebase.auth().signOut()
+        .then(() => {
+            this.token = null;
+            this.router.navigate(['/index']);
+            this.toastr.success('Successfully Logged Out!', 'Success');
+        });
+}
 
-    return this.tokenForCrud;
-    }
+getToken() {
+    this.token = sessionStorage.getItem('authtoken')
+    return this.token;
+}
 
-    isAuth(): boolean {
-        return this.token != null;
-    }
+isAuth(): boolean {
+    return this.token != null;
+}
 }

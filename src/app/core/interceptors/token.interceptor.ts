@@ -17,7 +17,8 @@ import {
     intercept(req: HttpRequest<any>, next: HttpHandler)
     : Observable<HttpEvent<any>> {
   
-      const token = this.authService.getCrudToken();
+      const token = this.authService.getToken();
+      console.log(token)
       if (token) {
         req = req.clone({
           url: `${req.url}?auth=${token}`

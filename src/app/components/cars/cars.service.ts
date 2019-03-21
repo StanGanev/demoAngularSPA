@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CarModel } from './model/car.model';
+import { ListCarModel } from './model/listCars.model'
+import { map } from 'rxjs/operators';
 
 
 const baseUrl = "https://ng-cars.firebaseio.com/cars"
@@ -11,13 +11,32 @@ const baseUrl = "https://ng-cars.firebaseio.com/cars"
     providedIn: 'root'
 })
 export class CarService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getAllCars() {
-        return this.http
+        return this.http.get(`${baseUrl}.json`)
+            .pipe(map((res: Response) => {
+                console.log(res)
+                const ids = Object.keys(res);
+                console.log(ids);
+                
+                const cars: ListCarModel[] = [];
+                for (let i of ids) {
+                    console.log(i);
+                    
+                    cars.push(new ListCarModel(i, res[i].title,
+                        res[i].description, res[i].brand, res[i].model,
+                        res[i].year, res[i].imageUrl, res[i].fuelType,
+                        res[i].price, res[i].sellerId));
+
+                } 
+                
+                return cars; 
+            }))
     }
 
-    createCar(model: CarModel) {
-        return this.http.post(`${baseUrl}.json`, model)
-    }
+
+createCar(model: CarModel) {
+    return this.http.post(`${baseUrl}.json`, model)
+}
 }

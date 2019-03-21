@@ -1,13 +1,13 @@
 export class CarModel {
     constructor(
-        title: string,
-        description: string,
-        brand: string,
-        model: string,
-        year: number,
-        imageUrl: string,
-        fuelType: string,
-        price: number,
-        sellerId?: string
+       public title: string,
+       public description: string,
+       public brand: string,
+       public model: string,
+       public year: number,
+       public imageUrl: string,
+       public fuelType: string,
+       public price: number,
+       public sellerId?: string
     ) {}
 }
