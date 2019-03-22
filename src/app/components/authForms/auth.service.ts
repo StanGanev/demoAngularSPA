@@ -20,7 +20,7 @@ export class AuthService {
                     .getIdToken()
                     .then((token: string) => {
                         this.token = token;
-                        sessionStorage.setItem('authtoken',this.token);
+                        sessionStorage.setItem('authtoken', this.token);
                     })
                 this.router.navigate(['/cars']);
                 this.toastr.success('Successfully Logged In!', 'Success');
@@ -29,35 +29,47 @@ export class AuthService {
                 this.toastr.error(err.message, 'Warning');
             })
 
-}
+    }
 
-register(email: string, password: string) {
-    firebase.auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((data) => {
-            this.router.navigate(['/login']);
-            this.toastr.success('Successfully Registered In!', 'Success')
-        })
-        .catch((err) => {
-            this.toastr.error(err.message, 'Warning');
-        })
-}
+    register(email: string, password: string) {
+        firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((data) => {
+                this.router.navigate(['/login']);
+                this.toastr.success('Successfully Registered In!', 'Success')
+            })
+            .catch((err) => {
+                this.toastr.error(err.message, 'Warning');
+            })
+    }
 
-logout() {
-    firebase.auth().signOut()
-        .then(() => {
-            this.token = null;
-            this.router.navigate(['/index']);
-            this.toastr.success('Successfully Logged Out!', 'Success');
-        });
-}
+    logout() {
+        firebase.auth().signOut()
+            .then(() => {
+                this.token = null;
+                sessionStorage.clear();
+                this.router.navigate(['/index']);
+                this.toastr.success('Successfully Logged Out!', 'Success');
+            });
+    }
 
-getToken() {
-    this.token = sessionStorage.getItem('authtoken')
-    return this.token;
-}
+    getUserId() {
+        return firebase.auth().currentUser.uid;
+    }
 
-isAuth(): boolean {
-    return this.token != null;
-}
+    getToken() {
+        this.token = sessionStorage.getItem('authtoken')
+        return this.token;
+    }
+
+    isAuth(): boolean {
+        return this.token != null;
+    }
+
+    isOwner(id): boolean {
+        if(id === this.getUserId()) {
+            return true;
+        }
+        return false;
+    }
 }

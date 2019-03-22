@@ -6,6 +6,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ListAllCarsComponent } from './components/cars/list-all-cars/list-all-cars.component';
 import { CreateCarComponent } from './components/cars/create-car/create-car.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { CarDetailsComponent } from './components/cars/car-details/car-details.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
     path: 'cars', children: [
       { path: '', pathMatch: 'full', component: ListAllCarsComponent },
       { path: 'listAll', component: ListAllCarsComponent },
-      { path: 'create', component: CreateCarComponent }
+      { path: 'create', component: CreateCarComponent },
+      { path: 'details/:id', component: CarDetailsComponent }
     ], canActivate: [AuthGuard]
   }
 ];

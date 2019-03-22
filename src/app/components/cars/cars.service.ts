@@ -16,13 +16,9 @@ export class CarService {
     getAllCars() {
         return this.http.get(`${baseUrl}.json`)
             .pipe(map((res: Response) => {
-                console.log(res)
-                const ids = Object.keys(res);
-                console.log(ids);
-                
+                const ids = Object.keys(res);    
                 const cars: ListCarModel[] = [];
                 for (let i of ids) {
-                    console.log(i);
                     
                     cars.push(new ListCarModel(i, res[i].title,
                         res[i].description, res[i].brand, res[i].model,
@@ -35,8 +31,20 @@ export class CarService {
             }))
     }
 
+    createCar(model: CarModel) {
+        return this.http.post(`${baseUrl}.json`, model)
+    }
 
-createCar(model: CarModel) {
-    return this.http.post(`${baseUrl}.json`, model)
-}
+    getById(carId : string) {
+        return this.http.get<ListCarModel>(`${baseUrl}/${carId}/.json`);
+    }
+
+    editCar(body) {
+        return this.http.patch(`${baseUrl}.json`, body);
+    }
+
+    deleteCar(carId : string) {
+        return this.http.delete(`${baseUrl}${carId}/.json`);
+      }
+
 }

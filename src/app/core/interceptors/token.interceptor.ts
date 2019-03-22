@@ -18,7 +18,6 @@ import {
     : Observable<HttpEvent<any>> {
   
       const token = this.authService.getToken();
-      console.log(token)
       if (token) {
         req = req.clone({
           url: `${req.url}?auth=${token}`

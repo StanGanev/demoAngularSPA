@@ -1,0 +1,30 @@
+div.my-listing-details {
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.listings-buttons {
+    width: 31%;
+    margin: auto;
+    margin-top: 34px;
+}
+
+.button-list {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    margin: 0 2.5px;
+    padding: 11px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#description-para {
+    width: 33.8em;
+}

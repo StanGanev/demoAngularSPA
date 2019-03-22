@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-* {
-    padding: 0;
-    margin: 0;
-}
 
-body {
-    font-family: 'Lato', sans-serif;
-}
+@import './assets/styles/site.css';
+@import './assets/styles/welcome.css';
+@import './assets/styles/car-listings.css';
+@import './assets/styles/login-register.css';
+@import './assets/styles/my-listings.css';
+@import './assets/styles/footer.css';
+@import './assets/styles/navigation.css';
+@import './assets/styles/listing-details.css';

@@ -1,7 +1,7 @@
 <div id="car-listings">
   <h1>Car Listings</h1>
-  <div id="listings" *ngFor="let car of cars | async">
-    <div class="listing">
+  <div id="listings" >
+    <div class="listing" *ngFor="let car of cars | async">
       <p></p>
       <img src="{{car.imageUrl}}">
       <h2>Brand: {{car.brand}}</h2>
@@ -14,13 +14,13 @@
         <div id="data-buttons">
           <ul>
             <li class="action">
-              <a routerLink="/cars/details/:id" class="button-carDetails">Details</a>
+              <a routerLink="/cars/details/{{car.id}}" class="button-carDetails">Details</a>
             </li>
             <li class="action">
-              <a routerLink="/cars/edit/:id" class="button-carDetails">edit</a>
+              <a *ngIf="authService.isOwner(car.sellerId)" routerLink="/cars/edit/{{car.id}}" class="button-carDetails">edit</a>
             </li>
             <li class="action">
-              <a routerLink="/cars/delete/:id" class="button-carDetails">delete</a>
+              <a *ngIf="authService.isOwner(car.sellerId)" routerLink="/cars/delete/{{car.id}}" class="button-carDetails">delete</a>
             </li>
           </ul>
         </div>
