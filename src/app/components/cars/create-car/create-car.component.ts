@@ -23,7 +23,7 @@ export class CreateCarComponent implements OnInit {
   createFunc() {
     this.car.sellerId = this.authService.getUserId();
     this.carsService.createCar(this.car)
-      .subscribe((data) => {
+      .subscribe(() => {
         this.toastr.success('Car Listed!','Success');
         this.router.navigate(['/cars/listAll'])
       })

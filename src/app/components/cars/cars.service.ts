@@ -24,7 +24,6 @@ export class CarService {
                         res[i].description, res[i].brand, res[i].model,
                         res[i].year, res[i].imageUrl, res[i].fuelType,
                         res[i].price, res[i].sellerId));
-
                 } 
                 
                 return cars; 
