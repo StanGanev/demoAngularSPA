@@ -11,8 +11,8 @@
       </div>
       <div class="listings-buttons">
 
-          <a href="#" class="button-list">Edit</a>
-          <a href="#" class="button-list">Delete</a>
+          <a *ngIf="authService.isOwner(car.sellerId)" routerLink="edit" class="button-list">Edit</a>
+          <a *ngIf="authService.isOwner(car.sellerId)" (click)="deleteFunc()"  class="button-list">Delete</a>
 
 
       </div>

@@ -1,3 +1,48 @@
-<p>
-  car-edit works!
-</p>
+<div id="edit-listing" *ngIf="carModel">
+  <form #f="ngForm" (ngSubmit)="editFunc()">
+
+      <div class="container">
+          <h1>Edit Car Listing</h1>
+          <p>Please fill in this form to edit an listing.</p>
+          <hr>
+          
+          <input type="hidden" name="id"  [(ngModel)]="id" class="form-control"/>
+          <input type="hidden" name="sellerId"  [(ngModel)]="carModel.sellerId" class="form-control"/>
+
+          <p>Title</p>
+          <input type="text" placeholder="Enter Title" name="title" required 
+          [(ngModel)]="carModel.title" class="form-control">
+
+          <p>Description</p>
+          <input type="text" placeholder="Enter Description" name="description" required 
+          [(ngModel)]="carModel.description" class="form-control">
+
+          <p>Car Brand</p>
+          <input type="text" placeholder="Enter Car Brand" name="brand" required 
+          [(ngModel)]="carModel.brand" class="form-control">
+
+          <p>Car Model</p>
+          <input type="text" placeholder="Enter Car Model" name="model" required 
+          [(ngModel)]="carModel.model" class="form-control">
+
+          <p>Car Year</p>
+          <input type="number" placeholder="Enter Car Year" name="year" required 
+          [(ngModel)]="carModel.year" class="form-control">
+
+          <p>Car Image</p>
+          <input type="text" placeholder="Enter Car Image" name="imageUrl" required 
+          [(ngModel)]="carModel.imageUrl" class="form-control">
+
+          <p>Car Fuel Type</p>
+          <input type="text" placeholder="Enter Car Fuel Type" name="fuelType" required 
+          [(ngModel)]="carModel.fuelType" class="form-control">
+
+          <p>Car Price</p>
+          <input type="number" placeholder="Enter Car Price" name="price" required 
+          [(ngModel)]="carModel.price" class="form-control">
+
+          <hr>
+          <button type="submit" class="registerbtn">Edit Listing</button>
+      </div>
+  </form>
+</div>

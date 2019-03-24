@@ -7,6 +7,10 @@ h3 {
     font-size: 20px;
 }
 
+#auto-title {
+    margin-top: 3rem;
+}
+
 .listings-buttons {
     width: 31%;
     margin: auto;
@@ -23,6 +27,7 @@ h3 {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 #description-para {

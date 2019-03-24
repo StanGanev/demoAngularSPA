@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ListCarModel } from '../model/listCars.model';
 import { CarService } from '../cars.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../authForms/auth.service';
 
 @Component({
   selector: 'app-car-details',
@@ -12,15 +14,22 @@ export class CarDetailsComponent implements OnInit {
   car: ListCarModel
   id: string
 
-  constructor(private carService: CarService, private route: ActivatedRoute) {
-    this.car = new ListCarModel('', '', '', '','', 0, '', '', 0,'')
-   }
+  constructor(private carService: CarService, private route: ActivatedRoute,
+    private toastr: ToastrService, private router: Router,private authService: AuthService) {
+    this.car = new ListCarModel('', '', '', '', '', 0, '', '', 0, '')
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.carService.getById(this.id).subscribe((data) => {
       this.car = data;
-      console.log(this.car);
+    })
+  }
+
+  deleteFunc() {
+    this.carService.deleteCar(this.id).subscribe((data) => {
+      this.toastr.success('Car deleted!', 'Success')
+      this.router.navigate(['cars']);
     })
   }
 

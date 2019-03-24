@@ -44,7 +44,7 @@ export class CarService {
     }
 
     deleteCar(carId : string) {
-        return this.http.delete(`${baseUrl}${carId}/.json`);
+        return this.http.delete(`${baseUrl}/${carId}/.json`);
       }
 
 }

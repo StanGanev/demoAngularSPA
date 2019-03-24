@@ -7,6 +7,7 @@ import { ListAllCarsComponent } from './components/cars/list-all-cars/list-all-c
 import { CreateCarComponent } from './components/cars/create-car/create-car.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { CarDetailsComponent } from './components/cars/car-details/car-details.component';
+import { CarEditComponent } from './components/cars/car-edit/car-edit.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -18,7 +19,9 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', component: ListAllCarsComponent },
       { path: 'listAll', component: ListAllCarsComponent },
       { path: 'create', component: CreateCarComponent },
-      { path: 'details/:id', component: CarDetailsComponent }
+      { path: 'details/:id', component: CarDetailsComponent },
+      { path: 'edit/:id', component: CarEditComponent },
+      { path: 'details/:id/edit', component: CarEditComponent }
     ], canActivate: [AuthGuard]
   }
 ];
