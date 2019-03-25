@@ -2,7 +2,7 @@
   <a class="active" routerLink="/index">Home</a>
   <div *ngIf="authService.isAuth()" id="profile">
     <a routerLink="/cars">All Listings</a>
-    <a routerLink="/cars/myCars">My Listings</a>
+    <a routerLink="/cars/listMy">My Listings</a>
     <a routerLink="/cars/create">Create Listing</a>
     <a routerLink='' (click)="logoutFunc()">Logout</a>
   </div>

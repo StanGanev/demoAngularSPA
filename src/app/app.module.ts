@@ -4,6 +4,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { CarDetailsComponent } from './components/cars/car-details/car-details.c
 import { CarEditComponent } from './components/cars/car-edit/car-edit.component';
 import { CreateCarComponent } from './components/cars/create-car/create-car.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { ListMyCarsComponent } from './components/cars/list-my-cars/list-my-cars.component';
+import { CarFilterPipe } from './core/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     ListAllCarsComponent,
     CarDetailsComponent,
     CarEditComponent,
-    CreateCarComponent
+    CreateCarComponent,
+    ListMyCarsComponent,
+    CarFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

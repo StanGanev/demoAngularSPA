@@ -12,7 +12,16 @@
       <div class="listings-buttons">
 
           <a *ngIf="authService.isOwner(car.sellerId)" routerLink="edit" class="button-list">Edit</a>
-          <a *ngIf="authService.isOwner(car.sellerId)" (click)="deleteFunc()"  class="button-list">Delete</a>
+          <swal
+                #deleteSwal
+                title="Are you sure you want to delete this car?"
+                text="This cannot be undone"
+                type="question"
+                [showCancelButton]="true"
+                [focusCancel]="true"
+                (confirm)="deleteFunc()">
+              </swal>
+          <a *ngIf="authService.isOwner(car.sellerId)" (click)="deleteSwal.show()"  class="button-list">Delete</a>
 
 
       </div>

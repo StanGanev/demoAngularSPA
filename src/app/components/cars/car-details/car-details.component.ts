@@ -10,12 +10,13 @@ import { AuthService } from '../../authForms/auth.service';
   templateUrl: './car-details.component.html',
   styleUrls: ['./car-details.component.css']
 })
+
 export class CarDetailsComponent implements OnInit {
   car: ListCarModel
   id: string
 
   constructor(private carService: CarService, private route: ActivatedRoute,
-    private toastr: ToastrService, private router: Router,private authService: AuthService) {
+    private toastr: ToastrService,private authService: AuthService,private router: Router) {
     this.car = new ListCarModel('', '', '', '', '', 0, '', '', 0, '')
   }
 
@@ -30,7 +31,6 @@ export class CarDetailsComponent implements OnInit {
     this.carService.deleteCar(this.id).subscribe((data) => {
       this.toastr.success('Car deleted!', 'Success')
       this.router.navigate(['cars']);
-    })
+  });
   }
-
 }

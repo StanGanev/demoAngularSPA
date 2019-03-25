@@ -1,6 +1,6 @@
 <div id="car-listings">
   <h1>Car Listings</h1>
-  <div id="listings" >
+  <div id="listings">
     <div class="listing" *ngFor="let car of cars | async">
       <p></p>
       <img src="{{car.imageUrl}}">
@@ -17,10 +17,15 @@
               <a routerLink="/cars/details/{{car.id}}" class="button-carDetails">Details</a>
             </li>
             <li class="action">
-              <a *ngIf="authService.isOwner(car.sellerId)" routerLink="/cars/edit/{{car.id}}" class="button-carDetails">edit</a>
+              <a *ngIf="authService.isOwner(car.sellerId)" routerLink="/cars/edit/{{car.id}}"
+                class="button-carDetails">edit</a>
             </li>
             <li class="action">
-              <a *ngIf="authService.isOwner(car.sellerId)" routerLink="/cars/delete/{{car.id}}" class="button-carDetails">delete</a>
+              <swal #deleteSwal title="Are you sure you want to delete this car?" text="This cannot be undone"
+                type="question" [showCancelButton]="true" [focusCancel]="true" (confirm)="deleteFunc(car.id)">
+              </swal>
+              <a *ngIf="authService.isOwner(car.sellerId)" (click)="deleteSwal.show()"
+                class="button-carDetails">delete</a>
             </li>
           </ul>
         </div>
@@ -28,4 +33,4 @@
     </div>
   </div>
 </div>
-<p class="no-cars" *ngIf="cars">No cars in database.</p>
+<p class="no-cars" *ngIf="!carService.gotCarsToShow">No cars in database.</p>

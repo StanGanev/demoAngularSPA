@@ -18,7 +18,6 @@ export class CarEditComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
     this.carService.getById(this.id)
       .subscribe((data) => {
         this.carModel = data;
