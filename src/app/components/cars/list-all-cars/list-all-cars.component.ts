@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CarService } from '../cars.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListCarModel } from '../model/listCars.model';
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './list-all-cars.component.html',
   styleUrls: ['./list-all-cars.component.css']
 })
-export class ListAllCarsComponent implements OnInit, OnChanges {
+export class ListAllCarsComponent implements OnInit {
   cars: Observable<ListCarModel[]>
 
   constructor(private carService: CarService, private authService: AuthService,
@@ -23,14 +23,11 @@ export class ListAllCarsComponent implements OnInit, OnChanges {
     this.cars = this.carService.getAllCars()
   }
 
-  ngOnChanges() {
-    this.cars = this.carService.getAllCars()
-  }
-
   deleteFunc(id) {
     this.carService.deleteCar(id).subscribe((data) => {
       this.toastr.success('Car deleted!', 'Success')
       this.router.navigate(['cars']);
+      this.ngOnInit();
     });
   }
 }
