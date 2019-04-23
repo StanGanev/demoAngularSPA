@@ -9,57 +9,60 @@
       <p>Title</p>
       <div class="form-group">
         <label for="title"></label>
-        <input type="text" placeholder="Enter Title" name="title" class="form-control" required
-        [(ngModel)]="car.title">
+        <input type="text" placeholder="Enter Title" name="title" #title="ngModel" class="form-control" required
+          pattern="^[A-Za-z].{6,22}$" [(ngModel)]="car.title">
+          <div *ngIf="title.invalid && (title.dirty || title.touched)" class="invalid-form">
+            <div *ngIf="title.errors.pattern">Title must be 6 to 22 symbols long and must start with letter</div>
+          </div>
       </div>
 
       <p>Description</p>
       <div class="form-group">
         <label for="description"></label>
         <input type="text" placeholder="Enter Description" name="description" class="form-control" required
-        [(ngModel)]="car.description">
+          [(ngModel)]="car.description">
       </div>
 
       <p>Car Brand</p>
       <div class="form-group">
         <label for="brand"></label>
         <input type="text" placeholder="Enter Car Brand" name="brand" class="form-control" required
-        [(ngModel)]="car.brand">
+          [(ngModel)]="car.brand">
       </div>
 
       <p>Car Model</p>
       <div class="form-group">
         <label for="model"></label>
         <input type="text" placeholder="Enter Car Model" name="model" class="form-control" required
-        [(ngModel)]="car.model">
+          [(ngModel)]="car.model">
       </div>
 
       <p>Car Year</p>
       <div class="form-group">
         <label for="year"></label>
         <input type="number" placeholder="Enter Car Year" name="year" class="form-control" required
-        [(ngModel)]="car.year">
+          [(ngModel)]="car.year">
       </div>
 
       <p>Car Image</p>
       <div class="form-group">
         <label for="imageUrl"></label>
         <input type="text" placeholder="Enter Car Image" name="imageUrl" class="form-control" required
-        [(ngModel)]="car.imageUrl">
+          [(ngModel)]="car.imageUrl">
       </div>
 
       <p>Car Fuel Type</p>
       <div class="form-group">
         <label for="fuelType"></label>
         <input type="text" placeholder="Enter Car Fuel Type" name="fuelType" class="form-control" required
-        [(ngModel)]="car.fuelType">
+          [(ngModel)]="car.fuelType">
       </div>
 
       <p>Car Price</p>
       <div class="form-group">
         <label for="price"></label>
         <input type="number" placeholder="Enter Car Price" name="price" class="form-control" required
-        [(ngModel)]="car.price">
+          [(ngModel)]="car.price">
       </div>
 
       <hr>
