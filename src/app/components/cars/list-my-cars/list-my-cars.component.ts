@@ -19,16 +19,20 @@ export class ListMyCarsComponent implements OnInit {
     private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
     ngOnInit() {
-      this.userId = this.authService.getUserId();
-      this.cars = this.carService.getAllCars()
+      this.init()
     }
   
     deleteFunc(id) {
       this.carService.deleteCar(id).subscribe((data) => {
         this.toastr.success('Car deleted!', 'Success')
         this.router.navigate(['cars']);
-        this.ngOnInit();
+        this.init();
       });
+    }
+
+    private init() {
+      this.userId = this.authService.getUserId();
+      this.cars = this.carService.getAllCars()
     }
 
 }

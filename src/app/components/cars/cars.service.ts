@@ -20,22 +20,7 @@ export class CarService {
     getAllCars() {
         return this.http.get(`${baseUrl}.json`)
             .pipe(map((res: Response) => {
-                if (res !== undefined && res !== null) {
-                    const ids = Object.keys(res);
-                    const cars: ListCarModel[] = [];
-                    for (let i of ids) {
-
-                        cars.push(new ListCarModel(i, res[i].title,
-                            res[i].description, res[i].brand, res[i].model,
-                            res[i].year, res[i].imageUrl, res[i].fuelType,
-                            res[i].price, res[i].sellerId));
-                    }
-                    this.gotCarsToShow = true;
-                    return cars;
-                }
-
-                this.gotCarsToShow = false;
-
+                return res ? this.mapToCarModels(res) : [];
             }))
     }
 
@@ -53,6 +38,22 @@ export class CarService {
 
     deleteCar(carId: string) {
         return this.http.delete(`${baseUrl}/${carId}/.json`)
+    }
+
+    private mapToCarModels(res) {
+        const ids = Object.keys(res);
+
+        const cars: ListCarModel[] = ids.map((id) => {
+            const r = res[id];
+
+            return new ListCarModel(
+                id, r.title, r.description,
+                r.brand, r.model,
+                r.year, r.imageUrl, r.fuelType,
+                r.price, r.sellerId);
+        });
+
+        return cars;
     }
 
 }

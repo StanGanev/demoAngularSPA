@@ -54,7 +54,7 @@ export class AuthService {
     }
 
     getUserId() {
-        return firebase.auth().currentUser.uid;
+        return firebase.auth().currentUser ? firebase.auth().currentUser.uid : "";
     }
 
     getToken() {
@@ -67,9 +67,6 @@ export class AuthService {
     }
 
     isOwner(id): boolean {
-        if(id === this.getUserId()) {
-            return true;
-        }
-        return false;
+        return id === this.getUserId();
     }
 }
